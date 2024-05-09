@@ -66,7 +66,7 @@ router.delete("/deletepost/:pid", async (req, res) => {
     const pid = req.params.pid;
     try {
         const post = await Post.findOneAndDelete({ _id: pid })
-        res.json({message:"deleted successfully!"})
+        res.json({ message: "deleted successfully!" })
     } catch (err) {
         res.json({ message: err.message })
     }
@@ -76,10 +76,14 @@ router.delete("/deletepost/:pid", async (req, res) => {
 router.post("/addcomment", async (req, res) => {
     const comment = req.body.comment;
     const pid = req.body.pid;
-    const post = await Post.findOne({ _id: pid })
-    post.comments.push(comment)
-    await post.save()
-    res.json(post)
+    console.log(comment)
+    try {
+        const post = await Post.findOneAndUpdate({ _id: pid }, { "$push": { "comments": comment } })
+        console.log("post added successfully")
+        res.json({ message: "added successfully!" })
+    } catch (err) {
+        res.json({ message: "comment was not added!" })
+    }
 })
 
 
