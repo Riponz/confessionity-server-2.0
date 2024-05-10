@@ -32,10 +32,24 @@ db.once('open', () => {
 })
 
 
+
+
 app.use("/user", userRoute)
 app.use("/post", postRoute)
 app.use("/group", groupRoute)
 
+
+// Function to make the HTTP request
+function makeRequest() {
+    fetch("https://confessionity-server-2-0.onrender.com/post/getpost")
+    .then(()=>console.log("up and running"))
+    .catch(err => console.log("opps! server down"))
+  }
+  
+
+  makeRequest();
+  
+  setInterval(makeRequest, 13 * 60 * 1000)
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
