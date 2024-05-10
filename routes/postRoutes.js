@@ -32,7 +32,7 @@ router.post('/addpost', async (req, res) => {
     const userid = req.body.uid;
     const content = req.body.content;
     const topicstr = req.body.topic;
-    const topics = topicstr.split(" ").slice(0, 3)
+    const topics = topicstr.split(/\s+/).slice(0, 3)
     try {
         const post = new Post({
             username: username,
