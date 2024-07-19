@@ -95,7 +95,7 @@ router.get("/uname/:uid", async (req, res) => {
     console.log(uid)
     const user = await User.findOne({ uid: uid });
     console.log(user)
-    res.json(user.username)
+    res.json(user?.username)
 });
 
 

@@ -14,7 +14,9 @@ const app = express();
 require('dotenv').config()
 
 
-app.use(cors());
+app.use(cors({
+    origin: ['http://localhost:5173',"https://confessionity.vercel.app"],
+}));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -42,14 +44,14 @@ app.use("/group", groupRoute)
 // Function to make the HTTP request
 function makeRequest() {
     fetch("https://confessionity-server-2-0.onrender.com/post/getpost")
-    .then(()=>console.log("up and running"))
-    .catch(err => console.log("opps! server down"))
-  }
-  
+        .then(() => console.log("up and running"))
+        .catch(err => console.log("opps! server down"))
+}
 
-  makeRequest();
-  
-  setInterval(makeRequest, 13 * 60 * 1000)
+
+makeRequest();
+
+setInterval(makeRequest, 13 * 60 * 1000)
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
