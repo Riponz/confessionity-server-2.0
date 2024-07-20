@@ -36,6 +36,7 @@ router.get('/getuser', async (req, res) => {
     const user = await User.findOne({ uid: uid });
 
     console.log("user", user);
+    if(user) {
 
             res.json({
                 id: user?._id,
@@ -44,6 +45,14 @@ router.get('/getuser', async (req, res) => {
                 status: "success",
                 message: "success",
             });
+        }
+            else{
+                console.log("no account found")
+                res.json({
+                    status: "error",
+                    message: "no account found!",
+                });
+            }
 
     //   res.json({name:"diganta"});
 });
