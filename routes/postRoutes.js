@@ -34,14 +34,25 @@ router.post('/addpost', async (req, res) => {
     const topicstr = req.body.topic;
     const topics = topicstr.split(/\s+/).slice(0, 3)
     try {
-        const post = new Post({
-            username: username,
-            uid: userid,
-            content: content,
-            topics: topics
-        });
+        if (topicstr) {
+            const post = new Post({
+                username: username,
+                uid: userid,
+                content: content,
+                topics: topics
+            });
 
-        await post.save();
+            await post.save();
+
+        } else {
+            const post = new Post({
+                username: username,
+                uid: userid,
+                content: content
+            });
+
+            await post.save();
+        }
 
         res.send({ message: "Upload successful!" })
     } catch (err) {
