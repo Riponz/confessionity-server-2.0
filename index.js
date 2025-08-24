@@ -5,13 +5,13 @@ const mongoose = require('mongoose');
 const userRoute = require('./routes/userRoutes');
 const postRoute = require('./routes/postRoutes');
 const groupRoute = require('./routes/groupRoutes');
+require('dotenv').config()
 
-const PORT = 3000
+const PORT = 3001
 const app = express();
 
 
 
-require('dotenv').config()
 
 
 app.use(cors());
@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-mongoose.connect('mongodb+srv://biswasdiganta2001:hxuhYZ6LdwCapRjU@cluster0.vn82wq6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+mongoose.connect(process.env.MONGOURI)
 
 const db = mongoose.connection;
 
